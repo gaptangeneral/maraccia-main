@@ -152,7 +152,8 @@ import os
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Yeni statik dosyalar dizini
+    BASE_DIR / 'static',  # Projenizin kök dizinindeki "static" klasörü
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles' 
@@ -170,3 +171,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #login urls
 LOGIN_REDIRECT_URL = "/inventory"
 LOGIN_URL = "login"
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Bu satırı ekleyin
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    # Diğer middleware'ler...
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
