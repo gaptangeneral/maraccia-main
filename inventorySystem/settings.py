@@ -155,7 +155,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Yeni statik dosyalar dizini
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
 
 
 # Default primary key field type

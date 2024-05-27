@@ -15,8 +15,7 @@ urlpatterns = [
         authentication_form=LoginForm  # Özel form sınıfımızı kullanma
     ), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='inventory_system/logout.html'), name='logout'),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Sadece DEBUG modunda statik dosyaları Django üzerinden sunma
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
