@@ -32,7 +32,7 @@ allowed_hosts_string = os.environ.get("ALLOWED_HOSTS")
 
 allowed_hosts = allowed_hosts_string.split(" ") if allowed_hosts_string else []
 
-ALLOWED_HOSTS = allowed_hosts + ['https://maraccia-hvhp.onrender.com', 'localhost']
+ALLOWED_HOSTS = allowed_hosts + ['maraccia-hvhp.onrender.com', 'localhost']
 ALLOWED_HOSTS = allowed_hosts + ['127.0.0.1', 'localhost']
 
 
