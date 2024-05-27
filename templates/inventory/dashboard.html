@@ -1,0 +1,55 @@
+{% extends "../layout.html" %}
+{% block content %}
+<main class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-body text-center"> <h5 class="card-title">Satış Trendi</h5>
+                        <div id="salesChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center"> <h5 class="card-title">En İyi Performans Gösteren Ürün</h5>
+                        <div id="bestProductChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"> <div class="card">
+                    <div class="card-body text-center"> <h5 class="card-title">En Çok Stokta Olan Ürün</h5>
+                        <div id="stockChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var salesGraphData = {{ sales_graph | safe }};
+        var bestProductData = {{ best_performing_product | safe }};
+        var stockData = {{ most_product_in_stock | safe }};
+
+        Plotly.newPlot('salesChart', salesGraphData, {
+            displayModeBar: false,
+            showTips: false
+        });
+
+        Plotly.newPlot('bestProductChart', bestProductData, {
+            displayModeBar: false,
+            showTips: false
+        });
+
+        Plotly.newPlot('stockChart', stockData, {
+            displayModeBar: false,
+            showTips: false
+        });
+    });
+</script>
+{% endblock %}

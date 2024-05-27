@@ -1,0 +1,49 @@
+body {
+  background-image: url('/static/images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.content-section  {
+  
+  background: #ffffff;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.3); /* Beyaz renk, %80 opaklık */
+  margin: 40px;
+  padding: 1.5rem 1.5rem;
+  border-radius: 10px;
+}
+
+#navbarss .nav-link { /* navbarss ID'si ile eşleştirildi */
+  color: #F1F1F1; /* Koyu gri */
+}
+
+#navbarss .nav-link.active { /* navbarss ID'si ile eşleştirildi */
+  font-weight: bold;
+}
+
+#navbarss .nav-link:hover { /* navbarss ID'si ile eşleştirildi */
+  color: #53134b; 
+  text-decoration: underline;
+}
+
+ 
+
+ .navbar-brand {
+  font-family: 'Helvetica Neue Light', sans-serif;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -2.5px; /* 15 piksel yukarı kaydır */
+  left: 10px;
+
+}
+
+ .navbar-custom {
+  background-color: #720000; /* Açık gri renk */
+  background-color: rgba(129, 33, 69, 0.8); /* Beyaz renk, %80 opaklık */
+}
+
+
