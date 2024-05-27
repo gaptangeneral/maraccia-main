@@ -27,7 +27,7 @@ SECRET_KEY='1i*lto=kq+!efwd*qajbu&^qwtkyoc8hg29gtbpbkqt0to@$ga'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 allowed_hosts_string = os.environ.get("ALLOWED_HOSTS")
 
 allowed_hosts = allowed_hosts_string.split(" ") if allowed_hosts_string else []
