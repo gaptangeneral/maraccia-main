@@ -9,13 +9,110 @@ import plotly.express as px
 from .forms import LoginForm
 from django.contrib.auth import views as auth_views
 from django.urls import path
+from django.contrib.auth.models import User, Group
+from .forms import CustomUserCreationForm, CustomUserChangeForm, GroupForm
+from .forms import EmployeeForm
+from .models import Employee
+
+@login_required
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('user_list')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'inventory/signup.html', {'form': form})
+
+@login_required
+def user_list(request):
+    users = User.objects.all()
+    context = {'users': users}
+    return render(request, 'inventory/user_list.html', context)
+
+@login_required
+def user_update(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_list')
+    else:
+        form = CustomUserChangeForm(instance=user)
+    return render(request, 'inventory/user_update.html', {'form': form})
+
+@login_required
+def group_list(request):
+    groups = Group.objects.all()
+    return render(request, 'inventory/group_list.html', {'groups': groups})
+
+@login_required
+def group_create(request):
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('group_list')
+    else:
+        form = GroupForm()
+    return render(request, 'inventory/group_create.html', {'form': form})
+
+@login_required
+def group_update(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if request.method == 'POST':
+        form = GroupForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save()
+            return redirect('group_list')
+    else:
+        form = GroupForm(instance=group)
+    return render(request, 'inventory/group_update.html', {'form': form})
+@login_required
+def employee_list(request):
+    employees = Employee.objects.all()
+    context = {
+        "employees": employees
+    }
+    return render(request, "inventory/employee_list.html", context=context)
+
+@login_required
+@login_required
+def employee_create(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employee_list')  # veya başka bir sayfaya yönlendirin
+    else:
+        form = EmployeeForm()
+    return render(request, 'inventory/employee_create.html', {'form': form})
 
 
-urlpatterns = [
-    # ... diğer URL yapılandırmaları
-    path("login/", auth_views.LoginView.as_view(template_name="inventory_system/login.html", authentication_form=LoginForm), name="login"),
-    # ... diğer URL yapılandırmaları
-]
+@login_required
+def employee_update(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('employee_list')
+    else:
+        form = EmployeeForm(instance=employee)
+    return render(request, 'inventory/employee_update.html', {'form': form})
+
+@login_required
+def employee_delete(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    employee.delete()
+    return redirect('employee_list')
+
+@login_required
+def logout_view(request):
+    auth_views.LogoutView.as_view(next_page='/login')(request)
+    return render(request, 'logout.html', {})  # logout.html şablonunu render et
 
 @login_required
 def inventory_list(request):
@@ -77,7 +174,7 @@ def dashboard(request):
     # Satış trendi grafiği
     sales_graph = df.groupby(by="last_sale_date", as_index=False, sort=False)['sales'].sum()
     sales_graph = px.line(sales_graph, x="last_sale_date", y="sales", title="Satış Trendi", labels={"last_sale_date": "Son Satış Tarihi", "sales": "Toplam Satış"})
-    sales_graph = sales_graph.to_html(full_html=False, include_plotlyjs=False) 
+    sales_graph = sales_graph.to_html(full_html=False, include_plotlyjs=False)
 
     # En çok satan ürün grafiği
     best_performing_product_df = df.groupby(by="name").sum().sort_values(by="quantity_sold", ascending=False)

@@ -3,7 +3,12 @@
 {% block content %}
 <div class="content-section">
     <small class="text-muted">
-        Çıkış yaptınız. <a href="{% url 'login' %}">Tekrar giriş yap</a>
+        Çıkış yaptınız. 5 saniye içinde giriş ekranına yönlendirileceksiniz.
     </small>
 </div>
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'login' %}"; 
+    }, 5000); // 5000 milisaniye = 5 saniye
+</script>
 {% endblock %}

@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '1i*lto=kq+!efwd*qajbu&^qwtkyoc8hg29gtbpbkqt0to@$ga'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 allowed_hosts_string = os.environ.get("ALLOWED_HOSTS")
 allowed_hosts = allowed_hosts_string.split(" ") if allowed_hosts_string else []
 ALLOWED_HOSTS = allowed_hosts + ['maraccia-hvhp.onrender.com', 'localhost', '127.0.0.1']
@@ -63,10 +63,10 @@ WSGI_APPLICATION = 'inventorySystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stockmanagement_django_render',
-        'USER': 'stockmanagement_django_render_user',
-        'PASSWORD': 'EQBMdsLIyUBtrCYfa3TwOTBTPlvy5DGX',
-        'HOST': 'dpg-cnmhbjuv3ddc73fjug4g-a.frankfurt-postgres.render.com',
+        'NAME': 'stockmanagement_12xr',
+        'USER': 'stockmanagement_12xr_user',
+        'PASSWORD': 'MmwPuEXysZCDyKa1J7DDKXepug2PVsAa',
+        'HOST': 'dpg-cpl3tsq0si5c738fgbk0-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
